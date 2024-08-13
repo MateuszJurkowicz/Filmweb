@@ -1,0 +1,107 @@
+<!--
+ - Created by mateusz.jurkowicz_br on 01.08.2024.
+ -->
+
+<!-- Main Page -->
+<template>
+    <lightning-card>
+        <div class="slds-align_absolute-center">
+            <lightning-input label="Search..." name="search" onchange={handleSearch}
+                             type="search" class="search-format"></lightning-input>
+        </div>
+
+        <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li class="slds-tabs_default__item tab-format" data-tab="Movies" onclick={handleTabChange}
+                    role="presentation" title="Movies">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <button aria-haspopup="true" class="slds-button" onclick={toggleMenu}>
+                            Movies&nbsp;
+                            <lightning-button-icon icon-name="utility:chevrondown" size="large"
+                                                   variant="bare"></lightning-button-icon>
+                        </button>
+                        <div class="slds-dropdown slds-dropdown_right">
+                            <ul class="slds-dropdown__list slds-dropdown_length-with-icon-10" role="menu">
+                                <li class="slds-dropdown__item" data-value="Popular movies"
+                                    onclick={handleDropdownSelect} role="presentation">
+                                    <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                                        <span class="slds-truncate" title="Popular movies">Popular now</span>
+                                    </a>
+                                </li>
+                                <li class="slds-dropdown__item" data-value="Top rated movies"
+                                    onclick={handleDropdownSelect} role="presentation">
+                                    <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                                        <span class="slds-truncate" title="Top rated movies">Top rated</span>
+                                    </a>
+                                </li>
+                                <li class="slds-dropdown__item" data-value="Favorite movies"
+                                    onclick={handleDropdownSelect} role="presentation">
+                                    <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                                        <span class="slds-truncate" title="Favorite movies">Favorite movies</span>
+                                    </a>
+                                </li>
+                                <li class="slds-dropdown__item" data-value="To watch movies"
+                                    onclick={handleDropdownSelect} role="presentation">
+                                    <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                                        <span class="slds-truncate" title="To watch movies">Watch list</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="slds-tabs_default__item tab-format" data-tab="Actors" onclick={handleTabChange}
+                    role="presentation" title="Actors">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <button aria-haspopup="true" class="slds-button" onclick={toggleMenu}>
+                            Actors&nbsp;
+                            <lightning-button-icon icon-name="utility:chevrondown" size="large"
+                                                   variant="bare"></lightning-button-icon>
+                        </button>
+                        <div class="slds-dropdown slds-dropdown_right">
+                            <ul class="slds-dropdown__list slds-dropdown_length-with-icon-10" role="menu">
+                                <li class="slds-dropdown__item" data-value="Popular actors"
+                                    onclick={handleDropdownSelect} role="presentation">
+                                    <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                                        <span class="slds-truncate" title="Popular actors">Popular actors</span>
+                                    </a>
+                                </li>
+                                <li class="slds-dropdown__item" data-value="Favorite actors"
+                                    onclick={handleDropdownSelect} role="presentation">
+                                    <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                                        <span class="slds-truncate" title="Favorite actors">Favorite actors</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="slds-tabs_default__content" role="tabpanel">
+<!--                ACTIVE TAB -&ndash;&gt; {activeTab}-->
+                <template if:true={isMoviesTabActive}>
+                    <template if:true={isPopularFilmsActive}>
+                        <c-movies-page name="Popular movies"></c-movies-page>
+                    </template>
+                    <template if:true={isTopRatedFilmsActive}>
+                        <c-movies-page name="Top rated movies"></c-movies-page>
+                    </template>
+                    <template if:true={isFavoriteFilmsActive}>
+                        <c-movies-page name="Favorite movies"></c-movies-page>
+                    </template>
+                    <template if:true={isWatchFilmsActive}>
+                        <c-movies-page name="To watch movies"></c-movies-page>
+                    </template>
+                </template>
+                <template if:true={isActorsTabActive}>
+                    <template if:true={isPopularActorsActive}>
+                        <c-persons-page name="Popular actors"></c-persons-page>
+                    </template>
+                    <template if:true={isFavoriteActorsActive}>
+                        <c-persons-page name="Favorite actors"></c-persons-page>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

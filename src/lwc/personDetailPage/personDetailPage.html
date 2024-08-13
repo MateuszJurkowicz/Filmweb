@@ -1,0 +1,73 @@
+<!--
+ - Created by mateusz.jurkowicz_br on 07.08.2024.
+ -->
+
+<!-- Person Detail Page -->
+
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium" lwc:if={person}>
+            <div class="slds-box slds-m-around_large">
+                <div class="slds-grid slds-wrap custom-container">
+
+                    <div class="slds-col slds-size_3-of-12 slds-align_absolute-center image-container">
+                        <img alt={person.Name} class="picture-format" src={person.Picture__c}>
+                        <div class="button-container">
+                            <lightning-button-icon alternative-text="Favorite"
+                                                   class="overlay-button"
+                                                   data-id={person.Actor_id__c}
+                                                   icon-name={iconName}
+                                                   onclick={favoriteClick}
+                                                   title="Add to favorite" variant="container">
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12  slds-m-top_medium">
+                        <div class="slds-text-title_caps slds-align_absolute-center slds-m-bottom_medium slds-text-title_bold title-format">
+                            <p>{person.Name}</p>
+                        </div>
+                        <div class="description-format">
+                            <div class="slds-m-left_large slds-m-right_large slds-line-clamp_medium content">
+                                <lightning-formatted-rich-text
+                                        value={person.Biography__c}></lightning-formatted-rich-text>
+                            </div>
+                            <div class="slds-text-align_right slds-m-right_large">
+                                <a onclick={viewMore}>{linkName}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 slds-m-top_large">
+                        <div class="description-format">
+                            <span> <strong>Birthday: </strong> {person.Birthday__c}</span><br/>
+                            <span> <strong>Deathday: </strong>{person.Deathday__c}</span><br/>
+                            <span> <strong>Place of birth: </strong>{person.Place_of_birth__c}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slds-col slds-size_12-of-12 slds-m-top_large custom-container">
+                    <div class="slds-align_absolute-center slds-m-bottom_medium title-format">
+                        <p>Known for</p>
+                    </div>
+                    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                        <lightning-carousel>
+                            <template for:each={person.filmsInfo} for:item="film">
+                                <lightning-carousel-image
+                                        alternative-text={film.title}
+                                        class="actor-image"
+                                        description={film.character}
+                                        header={film.title}
+                                        key={film.name}
+                                        src={film.poster_path}>
+                                </lightning-carousel-image>
+                            </template>
+                        </lightning-carousel>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </lightning-card>
+</template>

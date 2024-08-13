@@ -1,0 +1,25 @@
+/**
+ * Created by mateusz.jurkowicz_br on 01.08.2024.
+ */
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-mainPage-format {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 4em;
+    font-family: system-ui;
+}
+
+.tab-format {
+    font-size: x-large;
+}
+
+.search-format {
+
+}

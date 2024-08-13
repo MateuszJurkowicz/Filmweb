@@ -1,0 +1,83 @@
+/**
+ * Created by mateusz.jurkowicz_br on 01.08.2024.
+ */
+
+.movie-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: solid 0.5px #c4daed;
+}
+
+.movie-image:hover {
+    box-shadow: grey 6px 6px 6px 1px;
+}
+
+.title-format {
+    font-size: 1.7em;
+}
+
+.description-format {
+    color: #54698d;
+}
+
+.movie-info-format {
+    font-family: system-ui;
+    text-align: justify;
+    font-size: 0.9rem;
+    color: #3e4a59;
+}
+
+
+.progress-bar-format {
+    width: 50%;
+    margin: 8px auto;
+}
+
+.box-format {
+    background: linear-gradient(314deg, #f6f8ff, #fbfcff, #f5f6f9, #dce0ed);
+}
+
+.movie-card {
+    margin: 15px;
+    background: radial-gradient(#fbecec, rgb(175 218 255));
+    border-style: groove;
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 15%;
+    width: 20%;
+    max-width: 25%;
+}
+
+.image-container {
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+}
+
+.overlay-button {
+    background-color: white;
+    border-radius: 50%;
+    padding: 3px;
+    border: inset;
+    border-width: medium;
+}
+
+.vote-average-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vote-average-text {
+    margin-right: 10px;
+}
+
+.progress-bar-format {
+    width: 50%;
+}

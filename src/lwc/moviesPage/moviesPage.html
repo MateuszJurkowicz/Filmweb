@@ -1,0 +1,80 @@
+<!-- Movies Page -->
+<template>
+    <lightning-card>
+        <!-- Spinner ładowania -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading data" size="large" variant="brand"></lightning-spinner>
+        </template>
+
+        <!-- Lista filmów -->
+        <template if:false={isLoading}>
+            <template if:true={movies.length}>
+                <div class="slds-m-around_x-large">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={movies} for:item="movie">
+                            <div class="slds-col slds-p-around_small movie-card" key={movie.Movie_Id__c}>
+                                <lightning-card>
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_12-of-12 image-container">
+                                            <a data-id={movie.Movie_Id__c} onclick={navigateToMovieDetailPage}>
+                                                <img alt={movie.Name} class="movie-image" src={movie.Poster_URL__c}>
+                                            </a>
+                                            <div class="button-container">
+                                                <lightning-button-icon alternative-text="To watch"
+                                                                       class="overlay-button"
+                                                                       data-id={movie.Movie_Id__c}
+                                                                       icon-name={movie.toWatchName}
+                                                                       onclick={toWatchClick}
+                                                                       title="Add to watch list"
+                                                                       variant="container">
+                                                </lightning-button-icon>
+                                                <lightning-button-icon alternative-text="Favorite"
+                                                                       class="overlay-button slds-m-left_x-small"
+                                                                       data-id={movie.Movie_Id__c}
+                                                                       icon-name={movie.favoriteName}
+                                                                       onclick={favoriteClick}
+                                                                       title="Add to favorite" variant="container">
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <div class="slds-text-title_caps slds-m-around_small slds-text-title_bold title-format slds-text-align_center">
+                                                <a data-id={movie.Movie_Id__c} onclick={navigateToMovieDetailPage}>
+                                                    <p>{movie.Name}</p>
+                                                </a>
+                                            </div>
+                                            <div class="slds-m-around_small description-format slds-line-clamp_small">
+                                                <span>{movie.Overview__c}</span>
+                                            </div>
+                                            <div class="slds-m-around_small movie-info-format">
+                                                <div class="vote-average-container">
+                                                    <span class="vote-average-text"><strong>Vote average: </strong>{movie.Vote_Average__c}</span>
+                                                    <lightning-progress-bar
+                                                            class="progress-bar-format"
+                                                            value={movie.Vote_Average__c}
+                                                            variant="circular">
+                                                    </lightning-progress-bar>
+                                                </div>
+                                                <span><strong>Vote count: </strong>{movie.Vote_Count__c}</span><br>
+                                                <span><strong>Release date: </strong>{movie.Release_Date__c}</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </lightning-card>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <template if:false={movies.length}>
+                <div class="slds-align_absolute-center title-format">
+                    <p>No movies loaded</p>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

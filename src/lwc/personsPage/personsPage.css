@@ -1,0 +1,62 @@
+/**
+ * Created by mateusz.jurkowicz_br on 01.08.2024.
+ */
+
+.person-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.person-image:hover {
+    box-shadow: grey 6px 6px 6px 1px;
+}
+
+.title-format {
+    font-size: 1.7em;
+}
+
+.description-format {
+    color: #54698d;
+}
+
+.person-info-format {
+    font-family: system-ui;
+    text-align: justify;
+    font-size: 0.9rem;
+    color: #3e4a59;
+}
+
+.box-format {
+    background: linear-gradient(314deg, #f6f8ff, #fbfcff, #f5f6f9, #dce0ed);
+}
+
+.person-card {
+    margin: 15px;
+    background: radial-gradient(#fbecec, rgb(175 218 255));
+    border-style: groove;
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 15%;
+    width: 20%;
+    max-width: 25%;
+}
+
+.image-container {
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+}
+
+.overlay-button {
+    background-color: white;
+    border-radius: 50%;
+    padding: 3px;
+    border: inset;
+    border-width: medium;
+}

@@ -1,0 +1,54 @@
+<!-- Persons Page -->
+<template>
+    <lightning-card>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading data" size="large" variant="brand"></lightning-spinner>
+        </template>
+
+        <template if:false={isLoading}>
+            <template if:true={persons.length}>
+                <div class="slds-m-around_x-large">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={persons} for:item="person">
+                            <div class="slds-col slds-p-around_small person-card" key={person.Actor_id__c}>
+                                <lightning-card>
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_12-of-12 image-container">
+                                            <a data-id={person.Actor_id__c} onclick={navigateToPersonDetailPage}>
+                                                <img alt={person.Name} class="person-image" src={person.Picture__c}>
+                                            </a>
+                                            <div class="button-container">
+                                                <lightning-button-icon alternative-text="Favorite"
+                                                                       class="overlay-button slds-m-left_x-small"
+                                                                       data-id={person.Actor_id__c}
+                                                                       icon-name={person.favoriteName}
+                                                                       onclick={favoriteClick}
+                                                                       title="Add to favorite" variant="container">
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <div class="slds-text-title_caps slds-m-around_small slds-text-title_bold title-format slds-text-align_center">
+                                                <a data-id={person.Actor_id__c} onclick={navigateToPersonDetailPage}>
+                                                    <p>{person.Name}</p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </lightning-card>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <template if:false={persons.length}>
+                <div class="slds-align_absolute-center title-format">
+                    <p>No persons loaded</p>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

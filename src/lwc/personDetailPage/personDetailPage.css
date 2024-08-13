@@ -1,0 +1,64 @@
+/**
+ * Created by mateusz.jurkowicz_br on 07.08.2024.
+ */
+
+.picture-format {
+    max-width: 100%;
+    height: auto;
+}
+
+.actor-image {
+    max-width: 12.5%;
+    max-height: 500px;
+}
+
+.title-format {
+    font-size: 3em;
+}
+
+.description-format {
+    font-size: 1.2em;
+}
+
+.comment-format {
+    background-color: #f2f2f2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #333;
+    min-height: 75px;
+}
+
+.comment-header {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.comment-content {
+    color: #555;
+}
+
+.image-container {
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+}
+
+.overlay-button {
+    background-color: white;
+    border-radius: 50%;
+    padding: 4px;
+    border: inset;
+    border-width: medium;
+}
+
+.custom-container {
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px -5px rgb(227 227 227);
+}

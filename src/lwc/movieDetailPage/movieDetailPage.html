@@ -1,0 +1,117 @@
+<!--
+ - Created by mateusz.jurkowicz_br on 05.08.2024.
+ -->
+
+<!-- Movie Detail Page -->
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium" lwc:if={movie}>
+            <div class="slds-box slds-m-around_large">
+
+                <div class="slds-grid slds-wrap custom-container">
+                    <div class="slds-col slds-size_3-of-12 slds-align_absolute-center image-container">
+                        <img alt={movie.Name} class="image-format" src={movie.Poster_URL__c}>
+                        <div class="button-container">
+                            <lightning-button-icon alternative-text="To watch"
+                                                   class="overlay-button"
+                                                   data-id={movie.Movie_Id__c}
+                                                   icon-name={toWatchName}
+                                                   onclick={toWatchClick}
+                                                   title="Add to watch list"
+                                                   variant="container">
+                            </lightning-button-icon>
+                            <lightning-button-icon alternative-text="Favorite"
+                                                   class="overlay-button slds-m-left_x-small"
+                                                   data-id={movie.Movie_Id__c}
+                                                   icon-name={favoriteName}
+                                                   onclick={favoriteClick}
+                                                   title="Add to favorite" variant="container">
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-top_medium">
+                        <div class="slds-text-title_caps slds-align_absolute-center slds-m-bottom_medium slds-text-title_bold title-format">
+                            <p>{movie.Name}</p>
+                        </div>
+                        <div class="slds-p-left_medium slds-m-bottom_small description-format">
+                            <span>{movie.Overview__c}</span>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 slds-m-top_large">
+                        <div class="description-format">
+                            <span> <strong>Release date: </strong> {movie.Release_Date__c}</span><br/>
+                            <span> <strong>Budget: </strong>{movie.Budget__c}$</span><br/>
+                            <span> <strong>Runtime: </strong>{movie.Runtime__c} min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-container slds-m-top_x-large">
+
+                    <div class="slds-col slds-size_12-of-12 slds-m-top_medium">
+                        <div class="slds-align_absolute-center slds-m-bottom_medium title-format">
+                            <p>Casts in this film</p>
+                        </div>
+                        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                            <lightning-carousel>
+                                <template for:each={movie.castInfo} for:item="actor">
+                                    <lightning-carousel-image
+                                            alternative-text={actor.name}
+                                            class="actor-image"
+                                            description={actor.character}
+                                            header={actor.name}
+                                            key={actor.name}
+                                            src={actor.profile_path}>
+                                    </lightning-carousel-image>
+                                </template>
+                            </lightning-carousel>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="custom-container slds-m-top_large comment-section">
+
+                    <div class="slds-align_absolute-center slds-m-bottom_medium slds-m-top_medium title-format">
+                        <p>Comments on this film</p>
+                    </div>
+                    <div>
+                        <template if:false={hasUserCommented}>
+                            <div class="slds-size_12-of-12 textarea-comment-format slds-align_absolute-center">
+                                <div class="slds-form-element__control">
+                                    <lightning-textarea class="slds-textarea" label="Add a comment"
+                                                        onchange={handleCommentChange} placeholder="Your text…"
+                                                        value={comment}></lightning-textarea>
+                                </div>
+                            </div>
+
+                            <div class="slds-size_12-of-12 slds-m-around_large button-comment-format">
+                                <lightning-button class="slds-m-right_large" label="Submit" onclick={submitComment}
+                                                  title="Submit"></lightning-button>
+                                <lightning-button disabled={isCleanable} label="Clear" onclick={clearComment}
+                                                  title="Clear"></lightning-button>
+                            </div>
+                        </template>
+                        <template if:true={hasUserCommented}>
+                            <div class="slds-text-align_center slds-text-color_error">
+                                You have already commented on this movie.
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="slds-size_12-of-12">
+                        <template for:each={comments} for:item="comment">
+                            <div class="comment-format slds-m-around_medium" key={comment.Name}>
+                                <p class="comment-header">on {comment.CreatedDate} user {comment.CreatedByName}
+                                    wrote:</p>
+                                <p class="comment-content">{comment.Content__c}</p>
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </lightning-card>
+</template>
